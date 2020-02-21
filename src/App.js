@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap'
 import CommentSection from './components/CommentSection/CommentSection'
+import api from './api'
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
+  let [languageOptions, setLanguageOptions] = useState([])
 
   // get speak language options here
-
+  useEffect(() => {
+    api.Translate.getSpeakLanguages()
+      .then(response => setLanguageOptions(response))
+      .catch(e => console.log(e))
+  }, [])
 
   return (
     <div className="App">
@@ -27,7 +33,7 @@ function App() {
 
                 <p>If this sounds interesting, then follow along this blog post to build a demo web form with language translation capability, powered by RapidAPI. But first, a very brief introduction to Google Translate API.</p>
                 --- Read More ---
-                <CommentSection />
+                <CommentSection languages={languageOptions} />
               </Col>
             </Row>
           </Container>

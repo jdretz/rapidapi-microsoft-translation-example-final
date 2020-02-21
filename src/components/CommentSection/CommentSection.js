@@ -26,7 +26,7 @@ const CommentSection = (props) => {
         <div>
             <h2 className={classes.Heading + " text-center m-3"}>Comments</h2>
             {comments && comments.map(comment => {
-                return <Comment key={comment.owner_id} delete={deleteComment} comment={comment} />
+                return <Comment languages={props.languages} key={comment.owner_id} delete={deleteComment} comment={comment} />
             })
             }
             <AddComment add={addComment} />
